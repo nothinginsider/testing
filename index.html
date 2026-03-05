@@ -31,7 +31,7 @@
       --nothing-border-strong: rgba(0, 0, 0, 0.35);
       --text-color: #111111;
       --table-hover: rgba(0, 0, 0, 0.03);
-      --mobile-toc-bg: rgba(0,0,0,0.05);
+      --mobile-toc-bg: rgba(0,0,0,0.03);
     }
 
     [data-theme='dark'] {
@@ -45,7 +45,7 @@
       --nothing-border-strong: rgba(255, 255, 255, 0.35);
       --text-color: #f5f5f5;
       --table-hover: rgba(255, 255, 255, 0.04);
-      --mobile-toc-bg: rgba(255,255,255,0.08);
+      --mobile-toc-bg: rgba(255,255,255,0.05);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -58,10 +58,10 @@
     /* ==========================================
        ANIMATIONS
        ========================================== */
-    @keyframes fadeInUp { 0% { opacity: 0; transform: translateY(30px); } 100% { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeInUp { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
     @keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
     .animate-fade-in { animation: fadeIn 0.4s ease forwards; }
-    .animate-slide-up { animation: fadeInUp 0.5s cubic-bezier(0.25, 0.8, 0.25, 1) forwards; opacity: 0; }
+    .animate-slide-up { animation: fadeInUp 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards; opacity: 0; }
     
     .featureRow > a:nth-child(1) .featureCard { animation-delay: 0.1s; }
     .featureRow > a:nth-child(2) .featureCard { animation-delay: 0.15s; }
@@ -87,37 +87,37 @@
     /* ==========================================
        HERO & HOMEPAGE
        ========================================== */
-    .heroBanner { padding: 6rem 1.5rem 5rem; text-align: left; position: relative; min-height: 45vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .heroBanner { padding: 5rem 1.5rem 4rem; text-align: left; position: relative; min-height: 40vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
     .glyphGrid { position: absolute; inset: 0; pointer-events: none; background-image: radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.08) 1px, transparent 0); background-size: 24px 24px; }
     [data-theme='dark'] .glyphGrid { background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.1) 1px, transparent 0); }
     .heroContent { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 3rem; width: 100%; max-width: 1050px; margin: 0 auto; flex-wrap: wrap; }
     .heroText { flex: 1; min-width: 300px; }
-    .heroTitle { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 700; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 1rem; }
-    .heroSubtitle { font-size: clamp(1rem, 2vw, 1.25rem); opacity: 0.7; margin: 0 0 2rem 0; font-weight: 400; line-height: 1.5; }
+    .heroTitle { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 700; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 1rem; }
+    .heroSubtitle { font-size: clamp(1rem, 2vw, 1.2rem); opacity: 0.7; margin: 0 0 2rem 0; font-weight: 400; line-height: 1.5; }
     .heroImageContainer { flex-shrink: 0; display: flex; justify-content: center; }
-    .heroImageContainer img { width: 100%; max-width: 250px; object-fit: contain; filter: drop-shadow(0 10px 30px rgba(215, 25, 33, 0.15)); transition: transform 0.3s; }
+    .heroImageContainer img { width: 100%; max-width: 220px; object-fit: contain; filter: drop-shadow(0 10px 30px rgba(215, 25, 33, 0.15)); transition: transform 0.3s; }
     [data-theme='dark'] .heroImageContainer img { filter: drop-shadow(0 10px 30px rgba(255, 59, 59, 0.25)); }
     .heroImageContainer img:hover { transform: scale(1.05) translateY(-5px); }
     .ctaButton { display: inline-flex; padding: 0.8rem 2rem; font-size: 0.95rem; font-weight: 600; background: var(--ifm-color-primary); color: #fff !important; border: none; border-radius: 4px; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 14px rgba(215, 25, 33, 0.2); }
     .ctaButton:hover { background: var(--ifm-color-primary-dark); transform: translateY(-3px); box-shadow: 0 6px 20px rgba(215, 25, 33, 0.3); }
 
-    /* Features / Cards */
-    .features { padding: 4rem 0 2rem; }
-    .sectionLabel { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; opacity: 0.5; margin-bottom: 2rem; display: block; }
-    .featureRow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-    .featureCard { position: relative; padding: 1.8rem; border: 1px solid var(--nothing-border); background-color: var(--card-bg); border-radius: 8px; height: 100%; min-height: 160px; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); overflow: hidden; opacity: 0; }
+    /* Features / Cards (SPACING REDUCED) */
+    .features { padding: 3rem 0 2rem; }
+    .sectionLabel { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; opacity: 0.5; margin-bottom: 1.5rem; display: block; }
+    .featureRow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+    .featureCard { position: relative; padding: 1.5rem; border: 1px solid var(--nothing-border); background-color: var(--card-bg); border-radius: 8px; height: 100%; min-height: 140px; transition: all 0.3s; overflow: hidden; opacity: 0; }
     .featureCard::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0; background: var(--ifm-color-primary); transition: height 0.3s; }
     .featureCard:hover { border-color: var(--nothing-border-strong); transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
     [data-theme='dark'] .featureCard:hover { box-shadow: 0 10px 25px rgba(0,0,0,0.4); }
     .featureCard:hover::before { height: 100%; }
-    .featureDot { display: block; width: 8px; height: 8px; background: var(--ifm-color-primary); margin-bottom: 1.2rem; border-radius: 50%; opacity: 0.9; }
-    .featureTitle { font-size: 1.15rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
-    .featureDesc { font-size: 0.9rem; opacity: 0.7; line-height: 1.5; }
+    .featureDot { display: block; width: 8px; height: 8px; background: var(--ifm-color-primary); margin-bottom: 1rem; border-radius: 50%; opacity: 0.9; }
+    .featureTitle { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.4rem; letter-spacing: -0.02em; }
+    .featureDesc { font-size: 0.85rem; opacity: 0.7; line-height: 1.4; margin: 0;}
 
     /* Social Links */
-    .socials { padding: 3rem 0 5rem; border-top: 1px solid var(--nothing-border); margin-top: 2rem; }
-    .socialLinks { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1.2rem; }
-    .socialLink { padding: 0.6rem 1.2rem; font-size: 0.85rem; font-weight: 500; border: 1px solid var(--nothing-border-strong); border-radius: 6px; transition: all 0.3s; background: var(--card-bg); display: inline-flex; }
+    .socials { padding: 2rem 0 4rem; border-top: 1px solid var(--nothing-border); margin-top: 1.5rem; }
+    .socialLinks { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1rem; }
+    .socialLink { padding: 0.5rem 1rem; font-size: 0.85rem; font-weight: 500; border: 1px solid var(--nothing-border-strong); border-radius: 6px; transition: all 0.3s; background: var(--card-bg); display: inline-flex; }
     .socialLink:hover { border-color: var(--ifm-color-primary); color: var(--ifm-color-primary); transform: translateY(-2px); }
 
     /* ==========================================
@@ -146,15 +146,15 @@
     .toc-link.h3 { padding-left: 0.8rem; font-size: 0.75rem; opacity: 0.5; }
 
     /* ==========================================
-       🔥 MOBILE BREADCRUMB & TOC (New Docusaurus Style)
+       🔥 MOBILE BREADCRUMB & TOC 
        ========================================== */
-    .mobile-top-bar { display: none; align-items: center; gap: 0.5rem; font-size: 0.9rem; margin-bottom: 1.5rem; color: var(--text-color); opacity: 0.8; font-weight: 500; }
+    .mobile-top-bar { display: none; align-items: center; gap: 0.5rem; font-size: 0.85rem; margin-bottom: 1rem; color: var(--text-color); opacity: 0.8; font-weight: 500; }
     .mobile-top-bar span { cursor: pointer; transition: color 0.2s; }
     .mobile-top-bar span:hover { color: var(--ifm-color-primary); opacity: 1; }
-    .mobile-top-bar .active-crumb { background: rgba(215,25,33,0.1); color: var(--ifm-color-primary); padding: 0.2rem 0.8rem; border-radius: 20px; font-weight: 600; opacity: 1; }
+    .mobile-top-bar .active-crumb { background: rgba(215,25,33,0.1); color: var(--ifm-color-primary); padding: 0.2rem 0.6rem; border-radius: 20px; font-weight: 600; opacity: 1; }
 
-    .mobile-toc { display: none; background-color: var(--mobile-toc-bg); border-radius: 8px; margin-bottom: 2rem; border: 1px solid var(--nothing-border); }
-    .mobile-toc summary { padding: 1rem; font-weight: 600; font-size: 0.9rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; list-style: none; }
+    .mobile-toc { display: none; background-color: var(--mobile-toc-bg); border-radius: 8px; margin-bottom: 1.5rem; border: 1px solid var(--nothing-border); }
+    .mobile-toc summary { padding: 0.8rem 1rem; font-weight: 600; font-size: 0.85rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; list-style: none; }
     .mobile-toc summary::-webkit-details-marker { display: none; }
     .mobile-toc summary::after { content: '▼'; font-size: 0.8em; opacity: 0.5; }
     .mobile-toc[open] summary::after { content: '▲'; }
@@ -163,46 +163,55 @@
     /* ==========================================
        🔥 COMPACT TABLES & TYPOGRAPHY FIX
        ========================================== */
-    .markdown-body h1 { font-size: 2.5rem; margin-bottom: 1rem; }
-    .markdown-body h2 { font-size: 1.6rem; margin-top: 2.5rem; margin-bottom: 1.2rem; border-bottom: 1px solid var(--nothing-border); padding-bottom: 0.5rem; }
-    .markdown-body h3 { font-size: 1.25rem; margin-top: 2rem; margin-bottom: 1rem; }
-    .markdown-body p, .markdown-body ul { margin-bottom: 1.2rem; opacity: 0.85; font-size: 0.95rem; }
+    .markdown-body h1 { font-size: 2.2rem; margin-bottom: 1rem; }
+    .markdown-body h2 { font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; border-bottom: 1px solid var(--nothing-border); padding-bottom: 0.5rem; }
+    .markdown-body h3 { font-size: 1.2rem; margin-top: 1.5rem; margin-bottom: 0.8rem; }
+    .markdown-body p, .markdown-body ul { margin-bottom: 1rem; opacity: 0.85; font-size: 0.9rem; }
     .markdown-body ul { margin-left: 1.5rem; }
     .markdown-body a { color: var(--ifm-color-primary); }
-    .markdown-body hr { border: none; height: 1.5px; background-color: var(--nothing-border-strong); margin: 2.5rem 0; opacity: 0.7; }
-    .markdown-body pre { background: var(--card-bg); border: 1px solid var(--nothing-border-strong); padding: 1.2rem; border-radius: 8px; overflow-x: auto; margin-bottom: 1.5rem; }
+    .markdown-body hr { border: none; height: 1px; background-color: var(--nothing-border-strong); margin: 2rem 0; opacity: 0.5; }
+    .markdown-body pre { background: var(--card-bg); border: 1px solid var(--nothing-border-strong); padding: 1rem; border-radius: 8px; overflow-x: auto; margin-bottom: 1.5rem; }
     
-    /* TABLE FIX: Compact size, no giant empty spaces */
-    .table-wrapper { overflow-x: auto; margin-bottom: 2rem; }
-    .markdown-body table { width: max-content; min-width: 50%; max-width: 100%; border-collapse: collapse; background-color: var(--card-bg); border-radius: 8px; overflow: hidden; font-size: 0.9rem; border: 1px solid var(--nothing-border-strong); box-shadow: 0 4px 12px rgba(0,0,0,0.03); margin-bottom: 0; }
-    .markdown-body th, .markdown-body td { padding: 0.9rem 1.2rem; text-align: left; border: 1px solid var(--nothing-border-strong); }
-    .markdown-body th { background: rgba(128, 128, 128, 0.1); font-weight: 600; text-transform: uppercase; font-size: 0.75rem; opacity: 0.9; }
+    /* TABLE FIX: Compact size, perfectly aligned borders */
+    .table-wrapper { overflow-x: auto; margin-bottom: 1.5rem; }
+    .markdown-body table { width: max-content; min-width: 60%; max-width: 100%; border-collapse: collapse; background-color: var(--card-bg); border-radius: 6px; overflow: hidden; font-size: 0.85rem; border: 1px solid var(--nothing-border-strong); box-shadow: 0 4px 10px rgba(0,0,0,0.03); margin-bottom: 0; }
+    .markdown-body th, .markdown-body td { padding: 0.7rem 1rem; text-align: left; border: 1px solid var(--nothing-border-strong); }
+    .markdown-body th { background: rgba(128, 128, 128, 0.08); font-weight: 600; text-transform: uppercase; font-size: 0.75rem; opacity: 0.9; }
 
     /* ==========================================
        MOBILE RESPONSIVE
        ========================================== */
     @media screen and (max-width: 1024px) { .doc-sidebar-right { display: none; } }
     @media screen and (max-width: 768px) {
-      .heroContent { flex-direction: column-reverse; text-align: center; gap: 2rem; }
-      .heroImageContainer img { max-width: 180px; }
-      .container { padding: 0 1.5rem; } 
+      .heroContent { flex-direction: column-reverse; text-align: center; gap: 1.5rem; }
+      .heroImageContainer img { max-width: 160px; }
+      .container { padding: 0 1rem; } 
       
-      .featureRow { grid-template-columns: 1fr; gap: 1.5rem; } /* 1 CARD MOBILE */
+      .featureRow { grid-template-columns: 1fr; gap: 1rem; } /* 1 CARD MOBILE */
+      .features { padding: 2rem 0; }
       
-      .docs-layout { flex-direction: column; padding: 1rem 1.5rem; gap: 1rem; }
+      .docs-layout { flex-direction: column; padding: 1rem; gap: 1rem; }
       
-      /* Hide old left sidebar completely on mobile */
-      .doc-sidebar-left { display: none; }
+      /* Bring back Left Sidebar as Horizontal Scroll on Mobile! */
+      .doc-sidebar-left { width: 100%; position: static; flex-direction: row; overflow-x: auto; padding-bottom: 10px; border-right: none; border-bottom: 1px solid var(--nothing-border); max-height: none; align-items: center;}
+      .sidebar-label { display: none; }
+      .sidebar-link { white-space: nowrap; margin-right: 0.5rem; padding: 0.4rem 0.8rem; border-radius: 20px; border: 1px solid var(--nothing-border); font-size: 0.8rem;}
+      .sidebar-link.active { border-color: var(--ifm-color-primary); }
+      .back-link { white-space: nowrap; margin-right: 0.5rem; margin-bottom: 0; padding: 0.4rem 0.6rem;}
       
-      /* Show new Mobile Nav & TOC */
+      /* Mobile Nav & TOC */
       .mobile-top-bar { display: flex; }
       .mobile-toc { display: block; }
       
       .doc-main { padding: 0; width: 100%; overflow-x: hidden; }
       .navbar__links { gap: 0.5rem; }
       
-      #floating-save-bar { width: 95% !important; flex-direction: column; text-align: center; }
-      .admin-box { width: 95%; }
+      /* Floating Save Box - Docked strictly at bottom to avoid keyboard overlap */
+      #floating-save-bar { bottom: 0 !important; width: 100% !important; border-radius: 0 !important; flex-direction: row; flex-wrap: wrap; justify-content: center; padding: 10px !important; border-left: none !important; border-right: none !important; border-bottom: none !important;}
+      .admin-box { width: 95%; max-height: 85vh; padding: 1rem; }
+      .admin-editor { height: 200px; }
+      .admin-controls { flex-direction: column; gap: 0.5rem;}
+      .admin-pass, .btn-save, .btn-cancel { width: 100%; }
     }
 
     /* Modals */
@@ -220,7 +229,7 @@
 
     #floating-save-bar { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--card-bg); padding: 15px 25px; border-radius: 50px; box-shadow: 0 10px 40px rgba(0,0,0,0.4); z-index: 9999; display: flex; gap: 10px; border: 2px solid var(--ifm-color-primary); align-items: center; }
 
-    .footer { border-top: 1px solid var(--nothing-border); padding: 2rem 1rem; background: var(--ifm-footer-background-color); color: #ffffff; text-align: center; font-size: 0.85rem; opacity: 0.8; user-select: none; cursor: pointer;}
+    .footer { border-top: 1px solid var(--nothing-border); padding: 2rem 1rem; background: var(--ifm-footer-background-color); color: #ffffff; text-align: center; font-size: 0.85rem; opacity: 0.8; user-select: none; }
   </style>
 </head>
 <body>
@@ -245,7 +254,7 @@
         <div class="heroText animate-slide-up stagger-1">
           <h1 class="heroTitle">Awesome Nothing</h1>
           <p class="heroSubtitle">A curated list of everything related to Nothing & CMF by Nothing ecosystem.</p>
-          <button class="ctaButton" onclick="document.getElementById('resources').scrollIntoView({behavior: 'smooth'})">Explore Resources</button>
+          <button class="ctaButton" onclick="openPage('intro')">Explore Resources</button>
         </div>
         <div class="heroImageContainer animate-slide-up stagger-2">
           <img src="https://raw.githubusercontent.com/spike0en/awesome_nothing/main/website/static/img/logo.png" alt="Awesome Nothing Logo" onerror="this.style.display='none'">
@@ -282,7 +291,7 @@
   <div id="content-view" class="hidden">
     <div class="docs-layout">
       <aside class="doc-sidebar-left animate-fade-in">
-        <a class="back-link" onclick="goHome()">← Back to Home</a>
+        <a class="back-link" onclick="goHome()">← Back</a>
         <div class="sidebar-label">Overview</div>
         <a class="sidebar-link" id="nav-intro" onclick="openPage('intro')">Introduction</a>
         <div class="sidebar-label">Resources</div>
@@ -297,7 +306,6 @@
       <main class="doc-main">
         <div class="mobile-top-bar">
           <span onclick="goHome()">🏠 Home</span> > 
-          <span>Resources</span> > 
           <span class="active-crumb" id="breadcrumb-current">...</span>
         </div>
 
@@ -344,20 +352,20 @@
   </div>
 
   <div id="floating-save-bar" class="hidden">
-    <span style="font-weight:700; color: var(--ifm-color-primary);">👁️ Visual Edit Mode</span>
-    <input type="password" id="live-pass" placeholder="Admin Password" style="padding: 8px 15px; border-radius: 20px; border: 1px solid var(--nothing-border); outline: none; background: var(--ifm-background-color); color: var(--text-color);">
-    <button id="btn-save-live" onclick="saveVisualEdits()" style="background: var(--ifm-color-primary); color: white; border: none; padding: 8px 20px; border-radius: 20px; font-weight: bold; cursor: pointer; transition: 0.2s;">Save to GitHub</button>
-    <button onclick="cancelVisualEdits()" style="background: transparent; color: var(--text-color); border: 1px solid var(--nothing-border); padding: 8px 20px; border-radius: 20px; cursor: pointer;">Cancel</button>
+    <span style="font-weight:700; color: var(--ifm-color-primary);">👁️ Edit Mode</span>
+    <input type="password" id="live-pass" placeholder="Password" style="padding: 6px 12px; border-radius: 20px; border: 1px solid var(--nothing-border); outline: none; background: var(--ifm-background-color); color: var(--text-color);">
+    <button id="btn-save-live" onclick="saveVisualEdits()" style="background: var(--ifm-color-primary); color: white; border: none; padding: 6px 15px; border-radius: 20px; font-weight: bold; cursor: pointer;">Save</button>
+    <button onclick="cancelVisualEdits()" style="background: transparent; color: var(--text-color); border: 1px solid var(--nothing-border); padding: 6px 15px; border-radius: 20px; cursor: pointer;">Cancel</button>
   </div>
 
-  <footer class="footer" onclick="triggerEditorChoice()">
-    <div class="container">Crafted with ❤️ by Spike & Shiki for the Nothing Community.</div>
+  <footer class="footer">
+    <div class="container">Crafted with <span id="secret-trigger" onclick="secretClick()" style="cursor:pointer; display:inline-block; padding: 0 5px;">❤️</span> by Spike & Shiki for the Nothing Community.</div>
   </footer>
 
   <script>
     // 🛑 ADMIN SETTINGS: Yahan apna data manually daalna ZAROORI hai!
-    const API_PART_1 = "ghp_xxxxxxxxxxxx";       // <-- REPLACE THIS 
-    const API_PART_2 = "yyyyyyyyyyyyyyyyyyyy";   // <-- REPLACE THIS 
+    const API_PART_1 = "ghp_xxxxxxxxxxxx";       // <-- REPLACE THIS (Pehla aadha hissa)
+    const API_PART_2 = "yyyyyyyyyyyyyyyyyyyy";   // <-- REPLACE THIS (Dusra aadha hissa)
     const ADMIN_PASSWORD = "rohit";              // <-- SET PASSWORD HERE
 
     let currentFileName = "";
@@ -378,9 +386,6 @@
       btn.innerText = isDark ? 'Dark Mode' : 'Light Mode';
     }
 
-    // ========================================================
-    // 🚀 NAVIGATION & FIX FOR BIG TABLES
-    // ========================================================
     async function openPage(fileName) {
       if (isVisualEditMode || isRawEditMode) return; 
 
@@ -425,7 +430,6 @@
         loader.classList.add('hidden');
         container.innerHTML = marked.parse(markdownText);
         
-        // Wrap tables in a div to prevent horizontal stretch overflow issues
         container.querySelectorAll('table').forEach(table => {
             const wrapper = document.createElement('div');
             wrapper.className = 'table-wrapper';
@@ -451,7 +455,6 @@
             
             tocContainer.appendChild(link.cloneNode(true));
             
-            // Add click listener to close mobile details when clicked
             const mLink = link.cloneNode(true);
             mLink.onclick = () => document.querySelector('.mobile-toc').removeAttribute('open');
             mobileTocContainer.appendChild(mLink);
@@ -473,9 +476,6 @@
       window.scrollTo(0, 0);
     }
 
-    // ========================================================
-    // 🚀 EDITORS LOGIC
-    // ========================================================
     function triggerEditorChoice() {
       if(isVisualEditMode || isRawEditMode) return;
       document.getElementById('editor-choice-modal').classList.remove('hidden');
@@ -493,7 +493,6 @@
 
     let adminEditingPath = "";
     
-    // 1. RAW CODE EDITOR
     async function startRawEditor() {
       closeEditorChoice();
       isRawEditMode = true;
@@ -525,7 +524,6 @@
     }
 
     async function saveRawToGitHub() {
-      // 🛑 TOKEN CHECK
       if (API_PART_1.includes("xxxxxxxx")) {
         alert("⚠️ SAVE FAILED!\n\nYou haven't added your GitHub Token yet. Please open the HTML code and replace 'ghp_xxxxxxxxxxxx' with your real token.");
         return;
@@ -551,14 +549,11 @@
           closeRawEditor();
           if (!currentFileName) window.location.reload(); 
           else openPage(currentFileName); 
-        } else {
-          alert(`❌ Failed to save.`);
-        }
+        } else { alert(`❌ Failed to save.`); }
       } catch (error) { alert("Error: " + error.message); }
       saveBtn.innerText = "Save to GitHub"; saveBtn.disabled = false;
     }
 
-    // 2. VISUAL EDITOR
     function startVisualEditor() {
       closeEditorChoice();
       isVisualEditMode = true;
@@ -568,7 +563,6 @@
       alert("✍️ VISUAL EDIT MODE ON\n\nYou can click on any text or card to edit it without opening a new page!");
     }
 
-    // SHIELD: Prevent clicking links/cards when visually editing
     document.addEventListener('click', function(e) {
       if (isVisualEditMode && e.target.closest('a')) e.preventDefault(); 
     });
