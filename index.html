@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" data-theme="dark"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Awesome Nothing | Home</title>
@@ -230,18 +229,18 @@
     .footer { border-top: 1px solid var(--nothing-border); padding: 2rem 1rem; background: var(--ifm-footer-background-color); color: #ffffff; text-align: center; font-size: 0.85rem; opacity: 0.8; user-select: none;}
   </style>
 </head>
-<body>
+<body style="border: none;">
 
   <nav class="navbar animate-fade-in">
     <div class="navbar__brand" onclick="goHome()">
-      <img src="https://raw.githubusercontent.com/nothinginsider/testing/main/website/static/img/logo.png" alt="Logo" onerror="this.style.display='none'"> 
+      <img src="https://raw.githubusercontent.com/nothinginsider/testing/main/website/static/img/logo.png" alt="Logo" onerror="this.style.display='none'" style="display: none;"> 
       Awesome Nothing
     </div>
     <div class="navbar__links">
       <a href="https://github.com/nothinginsider/testing/stargazers" target="_blank" class="github-badge">
-        <img src="https://img.shields.io/github/stars/nothinginsider/testing?style=social&label=Stars" alt="GitHub Stars">
+        <img src="https://img.shields.io/github/stars/nothinginsider/testing?style=social&amp;label=Stars" alt="GitHub Stars">
       </a>
-      <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">...</button>
+      <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">Light Mode</button>
     </div>
   </nav>
 
@@ -251,11 +250,11 @@
       <div class="container heroContent">
         <div class="heroText animate-slide-up stagger-1">
           <h1 class="heroTitle">Awesome Nothing</h1>
-          <p class="heroSubtitle">A curated list of everything related to Nothing & CMF by Nothing ecosystem.</p>
+          <p class="heroSubtitle">A curated list of everything related to Nothing &amp; CMF by Nothing ecosystem.</p>
           <button class="ctaButton" onclick="openPage('intro')">Explore Resources</button>
         </div>
         <div class="heroImageContainer animate-slide-up stagger-2">
-          <img src="https://raw.githubusercontent.com/nothinginsider/testing/main/website/static/img/logo.png" alt="Awesome Nothing Logo" onerror="this.style.display='none'">
+          <img src="https://raw.githubusercontent.com/nothinginsider/testing/main/website/static/img/logo.png" alt="Awesome Nothing Logo" onerror="this.style.display='none'" style="display: none;">
         </div>
       </div>
     </header>
@@ -264,7 +263,7 @@
       <div class="container">
         <span class="sectionLabel animate-slide-up stagger-1">Resources</span>
         <div class="featureRow">
-          <a onclick="openPage('devices')" class="featureLink"><div class="featureCard animate-slide-up stagger-1"><span class="featureDot"></span><h3 class="featureTitle">Devices</h3><p class="featureDesc">Complete catalog of Nothing phones and accessories.</p></div></a>
+          <a onclick="openPage('devices')" class="featureLink"><div class="featureCard animate-slide-up stagger-1"><span class="featureDot"></span><h3 class="featureTitle">Devicess</h3><p class="featureDesc">Complete catalog of Nothing phones and accessories.</p></div></a>
           <a onclick="openPage('apps')" class="featureLink"><div class="featureCard animate-slide-up stagger-2"><span class="featureDot"></span><h3 class="featureTitle">Community Apps</h3><p class="featureDesc">Glyph-powered apps and community tools.</p></div></a>
           <a onclick="openPage('projects')" class="featureLink"><div class="featureCard animate-slide-up stagger-3"><span class="featureDot"></span><h3 class="featureTitle">Projects</h3><p class="featureDesc">Glyph tools, modules, and other mods.</p></div></a>
           <a onclick="openPage('official')" class="featureLink"><div class="featureCard animate-slide-up stagger-4"><span class="featureDot"></span><h3 class="featureTitle">Official Resources</h3><p class="featureDesc">Apps, wallpapers, fonts, and SDKs.</p></div></a>
@@ -307,8 +306,8 @@
 
       <main class="doc-main">
         <div class="mobile-top-bar">
-          <span onclick="goHome()">🏠 Home</span> > 
-          <span>Docs</span> > 
+          <span onclick="goHome()">🏠 Home</span> &gt; 
+          <span>Docs</span> &gt; 
           <span class="active-crumb" id="breadcrumb-current">...</span>
         </div>
 
@@ -357,13 +356,13 @@
   <div id="floating-save-bar" class="hidden">
     <span style="font-weight:700; color: var(--ifm-color-primary);">👁️ Edit Mode</span>
     <input type="password" id="live-pass" placeholder="Password" style="padding: 6px 12px; border-radius: 20px; border: 1px solid var(--nothing-border); outline: none; background: var(--ifm-background-color); color: var(--text-color);">
-    <button id="btn-save-live" onclick="saveVisualEdits()" style="background: var(--ifm-color-primary); color: white; border: none; padding: 6px 15px; border-radius: 20px; font-weight: bold; cursor: pointer;">Save</button>
+    <button id="btn-save-live" onclick="saveVisualEdits()" style="background: var(--ifm-color-primary); color: white; border: none; padding: 6px 15px; border-radius: 20px; font-weight: bold; cursor: pointer;" disabled="">Saving...</button>
     <button onclick="cancelVisualEdits()" style="background: transparent; color: var(--text-color); border: 1px solid var(--nothing-border); padding: 6px 15px; border-radius: 20px; cursor: pointer;">Cancel</button>
   </div>
 
   <footer class="footer">
     <div class="container">
-      Crafted with <span id="secret-trigger" onclick="secretClick()" style="cursor:pointer; display:inline-block; padding: 0 5px;">❤️</span> by Spike & Shiki for the Nothing Community.
+      Crafted with <span id="secret-trigger" onclick="secretClick()" style="cursor:pointer; display:inline-block; padding: 0 5px;">❤️</span> by Spike &amp; Shiki for the Nothing Community.
     </div>
   </footer>
 
@@ -661,5 +660,6 @@
       clickTimer = setTimeout(() => { clickCount = 0; }, 1500);
     }
   </script>
-</body>
-</html>
+
+
+</body></html>
