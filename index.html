@@ -234,12 +234,12 @@
 
   <nav class="navbar animate-fade-in">
     <div class="navbar__brand" onclick="goHome()">
-      <img src="https://raw.githubusercontent.com/nothingsider/testing/main/website/static/img/logo.png" alt="Logo" onerror="this.style.display='none'"> 
+      <img src="https://raw.githubusercontent.com/nothinginsider/testing/main/website/static/img/logo.png" alt="Logo" onerror="this.style.display='none'"> 
       Awesome Nothing
     </div>
     <div class="navbar__links">
-      <a href="https://github.com/nothingsider/testing/stargazers" target="_blank" class="github-badge">
-        <img src="https://img.shields.io/github/stars/nothingsider/testing?style=social&label=Stars" alt="GitHub Stars">
+      <a href="https://github.com/nothinginsider/testing/stargazers" target="_blank" class="github-badge">
+        <img src="https://img.shields.io/github/stars/nothinginsider/testing?style=social&label=Stars" alt="GitHub Stars">
       </a>
       <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">...</button>
     </div>
@@ -255,7 +255,7 @@
           <button class="ctaButton" onclick="openPage('intro')">Explore Resources</button>
         </div>
         <div class="heroImageContainer animate-slide-up stagger-2">
-          <img src="https://raw.githubusercontent.com/nothingsider/testing/main/website/static/img/logo.png" alt="Awesome Nothing Logo" onerror="this.style.display='none'">
+          <img src="https://raw.githubusercontent.com/nothinginsider/testing/main/website/static/img/logo.png" alt="Awesome Nothing Logo" onerror="this.style.display='none'">
         </div>
       </div>
     </header>
@@ -439,7 +439,7 @@
       window.scrollTo(0, 0);
 
       currentFileName = fileName;
-      const githubRawUrl = `https://api.github.com/repos/nothingsider/testing/contents/website/docs/${fileName}.md?ref=main`;
+      const githubRawUrl = `https://api.github.com/repos/nothinginsider/testing/contents/website/docs/${fileName}.md?ref=main`;
 
       try {
         const response = await fetch(githubRawUrl);
@@ -532,7 +532,7 @@
       document.getElementById('editing-file-name').innerText = currentFileName ? currentFileName + ".md" : "index.html";
 
       try {
-        const response = await fetch(`https://api.github.com/repos/nothingsider/testing/contents/${adminEditingPath}?ref=main`);
+        const response = await fetch(`https://api.github.com/repos/nothinginsider/testing/contents/${adminEditingPath}?ref=main`);
         const data = await response.json();
         currentFileSha = data.sha;
         editor.value = safeDecodeBase64(data.content);
@@ -563,7 +563,7 @@
       const base64Content = safeEncodeBase64(document.getElementById('admin-editor').value);
 
       try {
-        const response = await fetch(`https://api.github.com/repos/nothingsider/testing/contents/${adminEditingPath}`, {
+        const response = await fetch(`https://api.github.com/repos/nothinginsider/testing/contents/${adminEditingPath}`, {
           method: 'PUT',
           headers: { 'Authorization': `Bearer ${combinedToken}`, 'Content-Type': 'application/json' },
           body: JSON.stringify({ message: `Raw code update: ${adminEditingPath}`, content: base64Content, sha: currentFileSha, branch: 'main' })
@@ -631,13 +631,13 @@
         document.getElementById('home-view').classList.remove('hidden');
         contentToSave = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
         try {
-           const resp = await fetch(`https://api.github.com/repos/nothingsider/testing/contents/index.html?ref=main`);
+           const resp = await fetch(`https://api.github.com/repos/nothinginsider/testing/contents/index.html?ref=main`);
            shaToUpdate = (await resp.json()).sha;
         } catch(e) {}
       }
 
       try {
-        const response = await fetch(`https://api.github.com/repos/nothingsider/testing/contents/${path}`, {
+        const response = await fetch(`https://api.github.com/repos/nothinginsider/testing/contents/${path}`, {
           method: 'PUT',
           headers: { 'Authorization': `Bearer ${combinedToken}`, 'Content-Type': 'application/json' },
           body: JSON.stringify({ message: `Visual Edit update`, content: safeEncodeBase64(contentToSave), sha: shaToUpdate, branch: 'main' })
