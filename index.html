@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Awesome Nothing | Home</title>
+  
+  <script>
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    document.documentElement.setAttribute('data-theme', systemPrefersDark ? 'dark' : 'light');
+  </script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://unpkg.com/turndown/dist/turndown.js"></script>
+
+  <style>
+    /* ==========================================
+       GLOBAL VARIABLES & THEME
+       ========================================== */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+    :root {
+      --ifm-color-primary: #d71921;
+      --ifm-color-primary-dark: #c1161d;
+      --ifm-font-family-base: 'Inter', system-ui, sans-serif;
+      --ifm-background-color: #f3f2ec;
+      --card-bg: #ffffff;             
+      --ifm-navbar-background-color: rgba(243, 242, 236, 0.85);
+      --ifm-footer-background-color: #1a1a1a;
+      --nothing-border: rgba(0, 0, 0, 0.15);
+      --nothing-border-strong: rgba(0, 0, 0, 0.35);
+      --text-color: #111111;
+      --table-hover: rgba(0, 0, 0, 0.03);
+    }
+
+    [data-theme='dark'] {
+      --ifm-color-primary: #ff3b3b;
+      --ifm-color-primary-dark: #ff1f1f;
+      --ifm-background-color: #000000; 
+      --card-bg: #0f0f0f;             
+      --ifm-navbar-background-color: rgba(0, 0, 0, 0.85);
+      --ifm-footer-background-color: #0d0d0d;
+      --nothing-border: rgba(255, 255, 255, 0.15);
+      --nothing-border-strong: rgba(255, 255, 255, 0.35);
+      --text-color: #f5f5f5;
+      --table-hover: rgba(255, 255, 255, 0.04);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    /* SCROLL FIX: Removed overflow to keep position: sticky working perfectly */
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    body { font-family: var(--ifm-font-family-base); background-color: var(--ifm-background-color); color: var(--text-color); line-height: 1.6; transition: background-color 0.3s ease, color 0.3s ease; width: 100%; max-width: 100vw; margin: 0; }
+    
+    a { text-decoration: none; color: inherit; cursor: pointer; transition: all 0.2s ease; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+    .hidden { display: none !important; }
+
+    /* ==========================================
+       🔥 SUPER SMOOTH ANIMATIONS
+       ========================================== */
+    @keyframes fadeInUp { 
+      0% { opacity: 0; transform: translateY(30px); } 
+      100% { opacity: 1; transform: translateY(0); } 
+    }
+    @keyframes fadeIn { 
+      0% { opacity: 0; } 
+      100% { opacity: 1; } 
+    }
+    
+    .animate-fade-in { animation: fadeIn 0.5s ease forwards; }
+    .animate-slide-up { animation: fadeInUp 0.6s cubic-bezier(0.25, 0.8, 0.25, 1) forwards; opacity: 0; }
+    
+    /* Staggered Delay for Elements */
+    .stagger-1 { animation-delay: 0.1s; }
+    .stagger-2 { animation-delay: 0.2s; }
+    .stagger-3 { animation-delay: 0.3s; }
+    .stagger-4 { animation-delay: 0.4s; }
+    .stagger-5 { animation-delay: 0.5s; }
+    .stagger-6 { animation-delay: 0.6s; }
+
+    /* ==========================================
+       NAVBAR
+       ========================================== */
+    .navbar { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; border-bottom: 1px solid var(--nothing-border); background-color: var(--ifm-navbar-background-color); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100; }
+    .navbar__brand { display: flex; align-items: center; gap: 0.8rem; font-weight: 700; font-size: 1.25rem; cursor: pointer; letter-spacing: -0.02em; transition: opacity 0.2s; }
+    .navbar__brand img { width: 32px; height: 32px; border-radius: 4px; object-fit: contain; }
+    .navbar__brand:hover { opacity: 0.7; }
+    .navbar__links { display: flex; align-items: center; gap: 1rem; }
+    .github-badge { display: flex; align-items: center; justify-content: center; height: 28px; }
+    .github-badge img { height: 100%; display: block; border-radius: 4px; }
+    .github-badge:hover { opacity: 0.8; }
+    .theme-toggle { background: none; border: 1px solid var(--nothing-border-strong); color: var(--text-color); padding: 0.45rem 1rem; cursor: pointer; font-family: inherit; font-weight: 600; font-size: 0.85rem; border-radius: 4px; transition: all 0.2s ease; }
+    .theme-toggle:hover { border-color: var(--ifm-color-primary); color: var(--ifm-color-primary); background: rgba(215, 25, 33, 0.05); }
+
+    /* ==========================================
+       HERO & HOMEPAGE
+       ========================================== */
+    .heroBanner { padding: 6rem 1.5rem 5rem; text-align: left; position: relative; min-height: 45vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .glyphGrid { position: absolute; inset: 0; pointer-events: none; background-image: radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.08) 1px, transparent 0); background-size: 24px 24px; }
+    [data-theme='dark'] .glyphGrid { background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.1) 1px, transparent 0); }
+    
+    .heroContent { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 3rem; width: 100%; max-width: 1050px; margin: 0 auto; flex-wrap: wrap; }
+    .heroText { flex: 1; min-width: 300px; }
+    .heroTitle { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 700; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 1rem; }
+    .heroSubtitle { font-size: clamp(1rem, 2vw, 1.25rem); opacity: 0.7; margin: 0 0 2rem 0; font-weight: 400; line-height: 1.5; }
+    
+    .heroImageContainer { flex-shrink: 0; display: flex; justify-content: center; }
+    .heroImageContainer img { width: 100%; max-width: 250px; object-fit: contain; filter: drop-shadow(0 10px 30px rgba(215, 25, 33, 0.15)); transition: transform 0.3s; }
+    [data-theme='dark'] .heroImageContainer img { filter: drop-shadow(0 10px 30px rgba(255, 59, 59, 0.25)); }
+    .heroImageContainer img:hover { transform: scale(1.05) translateY(-5px); }
+
+    .ctaButton { display: inline-flex; padding: 0.8rem 2rem; font-size: 0.95rem; font-weight: 600; background: var(--ifm-color-primary); color: #fff !important; border: none; border-radius: 4px; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 14px rgba(215, 25, 33, 0.2); }
+    .ctaButton:hover { background: var(--ifm-color-primary-dark); transform: translateY(-3px); box-shadow: 0 6px 20px rgba(215, 25, 33, 0.3); }
+
+    /* ==========================================
+       FEATURES / CARDS (Desktop: 3, Mobile: 1)
+       ========================================== */
+    .features { padding: 4rem 0 2rem; }
+    .sectionLabel { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; opacity: 0.5; margin-bottom: 2rem; display: block; }
+    
+    /* EXACTLY 3 COLUMNS ON DESKTOP */
+    .featureRow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    
+    .featureCard { position: relative; padding: 1.8rem; border: 1px solid var(--nothing-border); background-color: var(--card-bg); border-radius: 8px; height: 100%; min-height: 160px; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); overflow: hidden; }
+    .featureCard::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0; background: var(--ifm-color-primary); transition: height 0.3s; }
+    .featureCard:hover { border-color: var(--nothing-border-strong); transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+    [data-theme='dark'] .featureCard:hover { box-shadow: 0 10px 25px rgba(0,0,0,0.4); }
+    .featureCard:hover::before { height: 100%; }
+    .featureDot { display: block; width: 8px; height: 8px; background: var(--ifm-color-primary); margin-bottom: 1.2rem; border-radius: 50%; opacity: 0.9; }
+    .featureTitle { font-size: 1.15rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+    .featureDesc { font-size: 0.9rem; opacity: 0.7; line-height: 1.5; }
+
+    /* Social Links */
+    .socials { padding: 3rem 0 5rem; border-top: 1px solid var(--nothing-border); margin-top: 2rem; }
+    .socialLinks { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1.2rem; }
+    .socialLink { padding: 0.6rem 1.2rem; font-size: 0.85rem; font-weight: 500; border: 1px solid var(--nothing-border-strong); border-radius: 6px; transition: all 0.3s; background: var(--card-bg); display: inline-flex; }
+    .socialLink:hover { border-color: var(--ifm-color-primary); color: var(--ifm-color-primary); transform: translateY(-2px); }
+
+    /* ==========================================
+       DOCS LAYOUT (Sticky Sidebars Fixed)
+       ========================================== */
+    .docs-layout { display: flex; align-items: flex-start; gap: 2rem; padding: 2rem 1.5rem; max-width: 1400px; margin: 0 auto; min-height: 80vh; }
+    
+    .doc-sidebar-left { width: 220px; flex-shrink: 0; position: sticky; top: 90px; align-self: flex-start; max-height: calc(100vh - 120px); overflow-y: auto; overflow-x: hidden; display: flex; flex-direction: column; gap: 0.2rem; border-right: 1px solid var(--nothing-border); padding-right: 1rem; }
+    .doc-sidebar-left::-webkit-scrollbar, .doc-sidebar-right::-webkit-scrollbar { width: 4px; }
+    .doc-sidebar-left::-webkit-scrollbar-thumb, .doc-sidebar-right::-webkit-scrollbar-thumb { background: var(--nothing-border-strong); border-radius: 4px; }
+
+    .back-link { font-size: 0.85rem; font-weight: 600; color: var(--text-color); opacity: 0.6; margin-bottom: 1.5rem; display: inline-flex; align-items: center; padding: 0.5rem 0.8rem; border-radius: 4px; border: 1px solid var(--nothing-border); }
+    .back-link:hover { opacity: 1; color: var(--ifm-color-primary); border-color: var(--ifm-color-primary); }
+    .sidebar-label { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; opacity: 0.4; margin-top: 1.2rem; margin-bottom: 0.4rem; padding-left: 0.8rem; }
+    .sidebar-link { padding: 0.4rem 0.8rem; border-radius: 4px; font-size: 0.85rem; font-weight: 500; color: var(--text-color); margin-bottom: 0.2rem; display: block; }
+    .sidebar-link.active { color: var(--ifm-color-primary); font-weight: 600; background: rgba(215, 25, 33, 0.05); }
+    [data-theme='dark'] .sidebar-link.active { background: rgba(255, 59, 59, 0.08); }
+
+    .doc-main { flex-grow: 1; min-width: 0; padding: 0 1rem; }
+    #loading-text { text-align: center; font-size: 0.95rem; margin-top: 3rem; opacity: 0.6; font-family: 'JetBrains Mono', monospace; }
+
+    .doc-sidebar-right { width: 200px; flex-shrink: 0; position: sticky; top: 90px; align-self: flex-start; max-height: calc(100vh - 120px); overflow-y: auto; overflow-x: hidden; border-left: 1px solid var(--nothing-border); padding-left: 1.5rem; }
+    .toc-title { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.5; margin-bottom: 1rem; }
+    .toc-menu { display: flex; flex-direction: column; gap: 0.5rem; width: 100%; word-break: break-word; }
+    .toc-link { font-size: 0.8rem; opacity: 0.6; display: block; width: 100%; }
+    .toc-link.h3 { padding-left: 0.8rem; font-size: 0.75rem; opacity: 0.5; }
+
+    /* ==========================================
+       MARKDOWN TYPOGRAPHY (Clear Borders & Tables)
+       ========================================== */
+    .markdown-body h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+    .markdown-body h2 { font-size: 1.6rem; margin-top: 2.5rem; margin-bottom: 1.2rem; border-bottom: 1px solid var(--nothing-border); padding-bottom: 0.5rem; }
+    .markdown-body h3 { font-size: 1.25rem; margin-top: 2rem; margin-bottom: 1rem; }
+    .markdown-body p, .markdown-body ul { margin-bottom: 1.2rem; opacity: 0.85; font-size: 0.95rem; }
+    .markdown-body ul { margin-left: 1.5rem; }
+    .markdown-body a { color: var(--ifm-color-primary); }
+    .markdown-body hr { border: none; height: 1px; background-color: var(--nothing-border-strong); margin: 2.5rem 0; opacity: 0.5; }
+    .markdown-body pre { background: var(--card-bg); border: 1px solid var(--nothing-border-strong); padding: 1.2rem; border-radius: 8px; overflow-x: auto; margin-bottom: 1.5rem; }
+    
+    .markdown-body table { width: 100%; border-collapse: collapse; margin-bottom: 2rem; background-color: var(--card-bg); border-radius: 8px; overflow: hidden; font-size: 0.9rem; border: 1px solid var(--nothing-border-strong); box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+    .markdown-body th, .markdown-body td { padding: 0.9rem 1.2rem; text-align: left; border: 1px solid var(--nothing-border-strong); }
+    .markdown-body th { background: rgba(128, 128, 128, 0.1); font-weight: 600; text-transform: uppercase; font-size: 0.75rem; opacity: 0.9; }
+
+    /* ==========================================
+       MOBILE RESPONSIVE
+       ========================================== */
+    @media screen and (max-width: 1024px) { .doc-sidebar-right { display: none; } }
+    @media screen and (max-width: 768px) {
+      .heroContent { flex-direction: column-reverse; text-align: center; gap: 2rem; }
+      .heroText { min-width: 100%; }
+      .heroImageContainer img { max-width: 180px; }
+      
+      .container { padding: 0 1.5rem; } 
+      
+      /* EXACTLY 1 COLUMN ON MOBILE */
+      .featureRow { grid-template-columns: 1fr; gap: 1.5rem; }
+      
+      .docs-layout { flex-direction: column; padding: 1rem 1.5rem; gap: 1.5rem; }
+      .doc-sidebar-left { width: 100%; position: static; flex-direction: row; overflow-x: auto; padding-bottom: 10px; border-right: none; border-bottom: 1px solid var(--nothing-border); max-height: none; }
+      .sidebar-label { display: none; }
+      .sidebar-link { white-space: nowrap; margin-right: 0.5rem; padding: 0.5rem 0.8rem; border-radius: 20px; border: 1px solid var(--nothing-border); }
+      .sidebar-link.active { border-color: var(--ifm-color-primary); }
+      .back-link { white-space: nowrap; margin-right: 1rem; margin-bottom: 0; }
+      .doc-main { padding: 0; width: 100%; overflow-x: hidden; }
+      .markdown-body table { display: block; overflow-x: auto; white-space: nowrap; width: 100%; }
+      .navbar__links { gap: 0.5rem; }
+      
+      #floating-save-bar { width: 95% !important; flex-direction: column; text-align: center; }
+      .admin-box { width: 95%; }
+    }
+
+    /* ==========================================
+       ADMIN MODALS & BARS
+       ========================================== */
+    .admin-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 9999; display: flex; align-items: center; justify-content: center; }
+    .admin-box { background: var(--ifm-background-color); border: 1px solid var(--ifm-color-primary); border-radius: 8px; width: 90%; max-width: 850px; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+    .admin-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--nothing-border); padding-bottom: 1rem; }
+    .admin-header h3 { font-size: 1.2rem; display: flex; align-items: center; gap: 0.5rem;}
+    
+    .admin-editor { width: 100%; height: 350px; background: var(--card-bg); color: var(--text-color); border: 1px solid var(--nothing-border-strong); border-radius: 4px; padding: 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; resize: vertical; outline: none; line-height: 1.5;}
+    .admin-editor:focus { border-color: var(--ifm-color-primary); }
+    
+    .admin-controls { display: flex; gap: 1rem; align-items: center; margin-top: 0.5rem;}
+    .admin-pass { flex: 1; padding: 0.8rem; background: var(--card-bg); color: var(--text-color); border: 1px solid var(--nothing-border-strong); border-radius: 4px; outline: none;}
+    .admin-pass:focus { border-color: var(--ifm-color-primary); }
+    .btn-save { background: #d71921; color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 4px; font-weight: 600; cursor: pointer; transition: 0.2s;}
+    .btn-save:hover { background: #b6151b; }
+    .btn-cancel { background: transparent; color: var(--text-color); border: 1px solid var(--nothing-border-strong); padding: 0.8rem 1.5rem; border-radius: 4px; cursor: pointer; }
+
+    #floating-save-bar { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--card-bg); padding: 15px 25px; border-radius: 50px; box-shadow: 0 10px 40px rgba(0,0,0,0.4); z-index: 9999; display: flex; gap: 10px; border: 2px solid var(--ifm-color-primary); align-items: center; }
+
+    .footer { border-top: 1px solid var(--nothing-border); padding: 2rem 1rem; background: var(--ifm-footer-background-color); color: #ffffff; text-align: center; font-size: 0.85rem; opacity: 0.8; user-select: none; cursor: pointer;}
+  </style>
+</head>
+<body>
+
+  <nav class="navbar animate-fade-in">
+    <div class="navbar__brand" onclick="goHome()">
+      <img src="https://raw.githubusercontent.com/spike0en/awesome_nothing/main/website/static/img/logo.png" alt="Logo" onerror="this.style.display='none'"> 
+      Awesome Nothing
+    </div>
+    <div class="navbar__links">
+      <a href="https://github.com/spike0en/awesome_nothing/stargazers" target="_blank" class="github-badge">
+        <img src="https://img.shields.io/github/stars/spike0en/awesome_nothing?style=social&label=Stars" alt="GitHub Stars">
+      </a>
+      <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">...</button>
+    </div>
+  </nav>
+
+  <div id="home-view" class="animate-fade-in">
+    <header class="heroBanner">
+      <div class="glyphGrid"></div>
+      <div class="container heroContent">
+        <div class="heroText animate-slide-up stagger-1">
+          <h1 class="heroTitle">Awesome Nothing</h1>
+          <p class="heroSubtitle">A curated list of everything related to Nothing & CMF by Nothing ecosystem.</p>
+          <button class="ctaButton" onclick="document.getElementById('resources').scrollIntoView({behavior: 'smooth'})">Explore Resources</button>
+        </div>
+        <div class="heroImageContainer animate-slide-up stagger-2">
+          <img src="https://raw.githubusercontent.com/spike0en/awesome_nothing/main/website/static/img/logo.png" alt="Awesome Nothing Logo" onerror="this.style.display='none'">
+        </div>
+      </div>
+    </header>
+
+    <section id="resources" class="features container">
+      <span class="sectionLabel animate-slide-up stagger-1">Resources</span>
+      <div class="featureRow">
+        <a onclick="openPage('devices')" class="featureLink"><div class="featureCard animate-slide-up stagger-1"><span class="featureDot"></span><h3 class="featureTitle">Devices</h3><p class="featureDesc">Complete catalog of Nothing phones and accessories.</p></div></a>
+        <a onclick="openPage('apps')" class="featureLink"><div class="featureCard animate-slide-up stagger-2"><span class="featureDot"></span><h3 class="featureTitle">Community Apps</h3><p class="featureDesc">Glyph-powered apps and community tools.</p></div></a>
+        <a onclick="openPage('projects')" class="featureLink"><div class="featureCard animate-slide-up stagger-3"><span class="featureDot"></span><h3 class="featureTitle">Projects</h3><p class="featureDesc">Glyph tools, modules, and other mods.</p></div></a>
+        <a onclick="openPage('official')" class="featureLink"><div class="featureCard animate-slide-up stagger-4"><span class="featureDot"></span><h3 class="featureTitle">Official Resources</h3><p class="featureDesc">Apps, wallpapers, fonts, and SDKs.</p></div></a>
+        <a onclick="openPage('photography')" class="featureLink"><div class="featureCard animate-slide-up stagger-5"><span class="featureDot"></span><h3 class="featureTitle">Photography</h3><p class="featureDesc">GCAM ports, configs, and camera presets.</p></div></a>
+        <a onclick="openPage('guides')" class="featureLink"><div class="featureCard animate-slide-up stagger-6"><span class="featureDot"></span><h3 class="featureTitle">Guides</h3><p class="featureDesc">Step-by-step bootloader and rooting guides.</p></div></a>
+      </div>
+    </section>
+
+    <section class="socials container animate-slide-up stagger-6">
+      <span class="sectionLabel">Connect with the Community</span>
+      <div class="socialLinks">
+        <a href="https://t.me/s/Nothing_Archive" target="_blank" class="socialLink">Telegram</a>
+        <a href="https://nothing.community" target="_blank" class="socialLink">Community</a>
+        <a href="https://discord.com/invite/nothingtech" target="_blank" class="socialLink">Discord</a>
+        <a href="https://www.reddit.com/r/NothingTech" target="_blank" class="socialLink">Reddit</a>
+        <a href="https://xdaforums.com/c/nothing.12583/" target="_blank" class="socialLink">XDA</a>
+        <a href="https://instagram.com/nothing" target="_blank" class="socialLink">Instagram</a>
+        <a href="https://nothingtools.github.io/" target="_blank" class="socialLink">Nothing Space</a>
+      </div>
+    </section>
+  </div>
+
+  <div id="content-view" class="hidden">
+    <div class="docs-layout">
+      <aside class="doc-sidebar-left animate-fade-in">
+        <a class="back-link" onclick="goHome()">← Back to Home</a>
+        <div class="sidebar-label">Overview</div>
+        <a class="sidebar-link" id="nav-intro" onclick="openPage('intro')">Introduction</a>
+        <div class="sidebar-label">Resources</div>
+        <a class="sidebar-link" id="nav-devices" onclick="openPage('devices')">Devices</a>
+        <a class="sidebar-link" id="nav-apps" onclick="openPage('apps')">Community Apps</a>
+        <a class="sidebar-link" id="nav-projects" onclick="openPage('projects')">Projects</a>
+        <a class="sidebar-link" id="nav-official" onclick="openPage('official')">Official Resources</a>
+        <a class="sidebar-link" id="nav-photography" onclick="openPage('photography')">Photography</a>
+        <a class="sidebar-link" id="nav-guides" onclick="openPage('guides')">Guides</a>
+      </aside>
+
+      <main class="doc-main">
+        <div id="loading-text" class="hidden">Fetching from GitHub...</div>
+        <div id="markdown-container" class="markdown-body"></div>
+      </main>
+
+      <aside class="doc-sidebar-right animate-fade-in">
+        <div class="toc-title">On this page</div>
+        <div class="toc-menu" id="toc-container"></div>
+      </aside>
+    </div>
+  </div>
+
+  <div id="editor-choice-modal" class="admin-modal hidden">
+    <div class="admin-box" style="max-width: 400px; text-align: center;">
+      <h3 style="margin-bottom: 10px;">🛠️ Select Edit Mode</h3>
+      <p style="opacity: 0.7; font-size: 0.9rem; margin-bottom: 20px;">Which editor would you like to use?</p>
+      
+      <button onclick="startVisualEditor()" class="ctaButton" style="width:100%; margin-bottom:15px; justify-content: center;">👁️ Live Visual Editor (Word-Style)</button>
+      <button onclick="startRawEditor()" class="ctaButton" style="width:100%; margin-bottom:15px; background: #1a1a1a; justify-content: center;">💻 Raw Code Editor (Markdown)</button>
+      <button onclick="closeEditorChoice()" class="btn-cancel" style="width:100%;">Cancel</button>
+    </div>
+  </div>
+
+  <div id="admin-modal" class="admin-modal hidden">
+    <div class="admin-box">
+      <div class="admin-header">
+        <h3>Raw Code Editor <span style="color:var(--ifm-color-primary);" id="editing-file-name">...</span></h3>
+        <button class="btn-cancel" style="border:none; padding: 0.5rem;" onclick="closeRawEditor()">✕</button>
+      </div>
+      <div id="admin-loading" style="display:none; color:var(--ifm-color-primary);">Fetching file details...</div>
+      <textarea id="admin-editor" class="admin-editor" spellcheck="false"></textarea>
+      <div class="admin-controls">
+        <input type="password" id="admin-pass-raw" class="admin-pass" placeholder="Enter Admin Password">
+        <button class="btn-cancel" onclick="closeRawEditor()">Cancel</button>
+        <button class="btn-save" id="btn-save-raw" onclick="saveRawToGitHub()">Save to GitHub</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="floating-save-bar" class="hidden">
+    <span style="font-weight:700; color: var(--ifm-color-primary);">👁️ Visual Edit Mode</span>
+    <input type="password" id="live-pass" placeholder="Admin Password" style="padding: 8px 15px; border-radius: 20px; border: 1px solid var(--nothing-border); outline: none; background: var(--ifm-background-color); color: var(--text-color);">
+    <button id="btn-save-live" onclick="saveVisualEdits()" style="background: var(--ifm-color-primary); color: white; border: none; padding: 8px 20px; border-radius: 20px; font-weight: bold; cursor: pointer; transition: 0.2s;">Save to GitHub</button>
+    <button onclick="cancelVisualEdits()" style="background: transparent; color: var(--text-color); border: 1px solid var(--nothing-border); padding: 8px 20px; border-radius: 20px; cursor: pointer;">Cancel</button>
+  </div>
+
+  <footer class="footer" onclick="triggerEditorChoice()">
+    <div class="container">Crafted with ❤️ by Spike & Shiki for the Nothing Community.</div>
+  </footer>
+
+  <script>
+    // 🛑 ADMIN SETTINGS: Paste tokens here
+    const API_PART_1 = "ghp_xxxxxxxxxxxx";       // <-- REPLACE THIS 
+    const API_PART_2 = "yyyyyyyyyyyyyyyyyyyy";   // <-- REPLACE THIS 
+    const ADMIN_PASSWORD = "rohit";              // <-- SET PASSWORD HERE
+
+    let currentFileName = "";
+    let currentFileSha = "";
+    
+    // Editor State Shields
+    let isVisualEditMode = false;
+    let isRawEditMode = false;
+
+    // Theme Setup
+    document.addEventListener("DOMContentLoaded", () => {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      document.getElementById('themeBtn').innerText = isDark ? 'Light Mode' : 'Dark Mode';
+    });
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const btn = document.getElementById('themeBtn');
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      btn.innerText = isDark ? 'Dark Mode' : 'Light Mode';
+    }
+
+    // ========================================================
+    // 🚀 NAVIGATION LOGIC (WITH EDIT MODE SHIELD)
+    // ========================================================
+    async function openPage(fileName) {
+      // SHIELD: If user is editing, DO NOT open the page!
+      if (isVisualEditMode || isRawEditMode) {
+        return; 
+      }
+
+      document.getElementById('home-view').classList.add('hidden');
+      const contentView = document.getElementById('content-view');
+      contentView.classList.remove('hidden');
+      
+      const container = document.getElementById('markdown-container');
+      const loader = document.getElementById('loading-text');
+      const tocContainer = document.getElementById('toc-container');
+      
+      document.querySelectorAll('.sidebar-link').forEach(el => el.classList.remove('active'));
+      const activeLink = document.getElementById('nav-' + fileName);
+      if (activeLink) activeLink.classList.add('active');
+
+      container.innerHTML = '';
+      tocContainer.innerHTML = ''; 
+      loader.classList.remove('hidden');
+      window.scrollTo(0, 0);
+
+      currentFileName = fileName;
+      const githubRawUrl = `https://api.github.com/repos/spike0en/awesome_nothing/contents/website/docs/${fileName}.md?ref=main`;
+
+      try {
+        const response = await fetch(githubRawUrl);
+        if (!response.ok) throw new Error('File not found (' + response.status + ')');
+        
+        const data = await response.json();
+        currentFileSha = data.sha;
+        
+        let markdownText = decodeURIComponent(escape(atob(data.content)));
+        markdownText = markdownText.replace(/^---[\s\S]*?---\n/, ''); 
+
+        loader.classList.add('hidden');
+        container.innerHTML = marked.parse(markdownText);
+        
+        // Trigger smooth fade up animation
+        container.classList.remove('animate-slide-up');
+        void container.offsetWidth; 
+        container.classList.add('animate-slide-up');
+
+        // TOC
+        const headings = container.querySelectorAll('h2, h3');
+        if (headings.length !== 0) {
+          headings.forEach((heading, index) => {
+            const text = heading.innerText;
+            const safeId = text.toLowerCase().replace(/[^\w]+/g, '-') + '-' + index;
+            heading.id = safeId; 
+            const link = document.createElement('a');
+            link.href = '#' + safeId;
+            link.innerText = text;
+            link.className = 'toc-link ' + heading.tagName.toLowerCase(); 
+            tocContainer.appendChild(link);
+          });
+        }
+      } catch (error) {
+        loader.classList.add('hidden');
+        container.innerHTML = `<h2 style="color: var(--ifm-color-primary);">Error Loading Content</h2><p>${error.message}</p>`;
+      }
+    }
+
+    function goHome() {
+      // SHIELD
+      if (isVisualEditMode || isRawEditMode) return;
+
+      currentFileName = "";
+      document.getElementById('content-view').classList.add('hidden');
+      const homeView = document.getElementById('home-view');
+      homeView.classList.remove('hidden');
+      window.scrollTo(0, 0);
+    }
+
+
+    // ========================================================
+    // 🚀 CHOOSE EDITOR MENU LOGIC
+    // ========================================================
+    function triggerEditorChoice() {
+      if(isVisualEditMode || isRawEditMode) return;
+      document.getElementById('editor-choice-modal').classList.remove('hidden');
+    }
+    function closeEditorChoice() {
+      document.getElementById('editor-choice-modal').classList.add('hidden');
+    }
+
+    // Keyboard shortcut
+    document.addEventListener('keydown', function(e) {
+      if (e.ctrlKey && e.shiftKey && e.key === 'E') {
+        e.preventDefault();
+        triggerEditorChoice();
+      }
+    });
+
+    // ========================================================
+    // 💻 1. RAW CODE EDITOR
+    // ========================================================
+    let adminEditingPath = "";
+    
+    async function startRawEditor() {
+      closeEditorChoice();
+      isRawEditMode = true;
+      document.getElementById('admin-modal').classList.remove('hidden');
+      document.body.style.overflow = "hidden"; 
+      
+      const editor = document.getElementById('admin-editor');
+      const loader = document.getElementById('admin-loading');
+      editor.value = "";
+      loader.style.display = "block";
+      
+      if (!currentFileName) {
+        adminEditingPath = "index.html"; 
+        document.getElementById('editing-file-name').innerText = "index.html";
+      } else {
+        adminEditingPath = `website/docs/${currentFileName}.md`;
+        document.getElementById('editing-file-name').innerText = currentFileName + ".md";
+      }
+
+      try {
+        const response = await fetch(`https://api.github.com/repos/spike0en/awesome_nothing/contents/${adminEditingPath}?ref=main`);
+        const data = await response.json();
+        currentFileSha = data.sha;
+        editor.value = decodeURIComponent(escape(atob(data.content)));
+        loader.style.display = "none";
+      } catch (error) {}
+    }
+
+    function closeRawEditor() {
+      isRawEditMode = false;
+      document.getElementById('admin-modal').classList.add('hidden');
+      document.body.style.overflow = "auto"; 
+      document.getElementById('admin-pass-raw').value = ""; 
+    }
+
+    async function saveRawToGitHub() {
+      const pwd = document.getElementById('admin-pass-raw').value;
+      const newContent = document.getElementById('admin-editor').value;
+      const saveBtn = document.getElementById('btn-save-raw');
+
+      if (!pwd || pwd !== ADMIN_PASSWORD) { alert("❌ Incorrect Password!"); return; }
+
+      saveBtn.innerText = "Saving..."; saveBtn.disabled = true;
+
+      const combinedToken = API_PART_1 + API_PART_2;
+      const base64Content = btoa(unescape(encodeURIComponent(newContent)));
+
+      try {
+        const response = await fetch(`https://api.github.com/repos/spike0en/awesome_nothing/contents/${adminEditingPath}`, {
+          method: 'PUT',
+          headers: { 'Authorization': `Bearer ${combinedToken}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: `Raw code update: ${adminEditingPath}`, content: base64Content, sha: currentFileSha, branch: 'main' })
+        });
+
+        if (response.ok) {
+          alert("✅ Success! Raw file updated securely.");
+          closeRawEditor();
+          if (!currentFileName) window.location.reload(); 
+          else openPage(currentFileName); 
+        } else {
+          alert(`❌ Failed to save.`);
+        }
+      } catch (error) { alert("Error: " + error.message); }
+      saveBtn.innerText = "Save to GitHub"; saveBtn.disabled = false;
+    }
+
+
+    // ========================================================
+    // 👁️ 2. LIVE VISUAL EDITOR (GOD MODE)
+    // ========================================================
+    function startVisualEditor() {
+      closeEditorChoice();
+      isVisualEditMode = true;
+      document.designMode = "on"; 
+      document.body.style.border = "3px solid var(--ifm-color-primary)";
+      document.getElementById('floating-save-bar').classList.remove('hidden');
+      alert("✍️ VISUAL EDIT MODE ON\n\nYou can click on any text or card to edit it without opening a new page!");
+    }
+
+    function cancelVisualEdits() {
+      isVisualEditMode = false;
+      document.designMode = "off";
+      document.body.style.border = "none";
+      document.getElementById('floating-save-bar').classList.add('hidden');
+      document.getElementById('live-pass').value = "";
+    }
+
+    async function saveVisualEdits() {
+      const pwd = document.getElementById('live-pass').value;
+      if (!pwd || pwd !== ADMIN_PASSWORD) { alert("❌ Incorrect Password!"); return; }
+
+      const saveBtn = document.getElementById('btn-save-live');
+      saveBtn.innerText = "Saving..."; saveBtn.disabled = true;
+
+      cancelVisualEdits(); // Clean up borders before saving
+
+      const combinedToken = API_PART_1 + API_PART_2;
+      let contentToSave = "";
+      let shaToUpdate = currentFileSha;
+      let path = "";
+
+      if (currentFileName) {
+        path = `website/docs/${currentFileName}.md`;
+        const turndownService = new TurndownService({ headingStyle: 'atx', codeBlockStyle: 'fenced' });
+        contentToSave = turndownService.turndown(document.getElementById('markdown-container').innerHTML);
+        contentToSave = `---\ntitle: ${currentFileName}\n---\n\n` + contentToSave;
+      } else {
+        path = `index.html`;
+        document.getElementById('markdown-container').innerHTML = '';
+        document.getElementById('content-view').classList.add('hidden');
+        document.getElementById('home-view').classList.remove('hidden');
+        contentToSave = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+
+        try {
+           const resp = await fetch(`https://api.github.com/repos/spike0en/awesome_nothing/contents/index.html?ref=main`);
+           const data = await resp.json();
+           shaToUpdate = data.sha;
+        } catch(e) {}
+      }
+
+      const base64Content = btoa(unescape(encodeURIComponent(contentToSave)));
+
+      try {
+        const response = await fetch(`https://api.github.com/repos/spike0en/awesome_nothing/contents/${path}`, {
+          method: 'PUT',
+          headers: { 'Authorization': `Bearer ${combinedToken}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: `Visual Edit update`, content: base64Content, sha: shaToUpdate, branch: 'main' })
+        });
+
+        if (response.ok) {
+          alert("✅ Success! Visual edits saved.");
+          if (!currentFileName) window.location.reload(); 
+          else openPage(currentFileName); 
+        } else {
+          alert(`❌ Failed to save.`);
+        }
+      } catch (error) {}
+      
+      saveBtn.innerText = "Save to GitHub"; saveBtn.disabled = false;
+    }
+  </script>
+</body>
+</html>
