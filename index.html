@@ -229,7 +229,7 @@
     .footer { border-top: 1px solid var(--nothing-border); padding: 2rem 1rem; background: var(--ifm-footer-background-color); color: #ffffff; text-align: center; font-size: 0.85rem; opacity: 0.8; user-select: none;}
   </style>
 </head>
-<body style="border: none;">
+<body style="overflow: auto; border: none;">
 
   <nav class="navbar animate-fade-in">
     <div class="navbar__brand" onclick="goHome()">
@@ -263,7 +263,7 @@
       <div class="container">
         <span class="sectionLabel animate-slide-up stagger-1">Resources</span>
         <div class="featureRow">
-          <a onclick="openPage('devices')" class="featureLink"><div class="featureCard animate-slide-up stagger-1"><span class="featureDot"></span><h3 class="featureTitle">Devicess</h3><p class="featureDesc">Complete catalog of Nothing phones and accessories.</p></div></a>
+          <a onclick="openPage('devices')" class="featureLink"><div class="featureCard animate-slide-up stagger-1"><span class="featureDot"></span><h3 class="featureTitle">Devices vr</h3><p class="featureDesc">Complete catalog of Nothing phones and accessories.</p></div></a>
           <a onclick="openPage('apps')" class="featureLink"><div class="featureCard animate-slide-up stagger-2"><span class="featureDot"></span><h3 class="featureTitle">Community Apps</h3><p class="featureDesc">Glyph-powered apps and community tools.</p></div></a>
           <a onclick="openPage('projects')" class="featureLink"><div class="featureCard animate-slide-up stagger-3"><span class="featureDot"></span><h3 class="featureTitle">Projects</h3><p class="featureDesc">Glyph tools, modules, and other mods.</p></div></a>
           <a onclick="openPage('official')" class="featureLink"><div class="featureCard animate-slide-up stagger-4"><span class="featureDot"></span><h3 class="featureTitle">Official Resources</h3><p class="featureDesc">Apps, wallpapers, fonts, and SDKs.</p></div></a>
@@ -289,7 +289,7 @@
     </section>
   </div>
 
-  <div id="content-view" class="hidden">
+  <div id="content-view" class="animate-fade-in hidden">
     <div class="docs-layout">
       <aside class="doc-sidebar-left animate-fade-in">
         <a class="back-link" onclick="goHome()">← Back to Home</a>
@@ -298,7 +298,7 @@
         <div class="sidebar-label">Resources</div>
         <a class="sidebar-link" id="nav-devices" onclick="openPage('devices')">Devices</a>
         <a class="sidebar-link" id="nav-apps" onclick="openPage('apps')">Community Apps</a>
-        <a class="sidebar-link" id="nav-projects" onclick="openPage('projects')">Projects</a>
+        <a class="sidebar-link active" id="nav-projects" onclick="openPage('projects')">Projects</a>
         <a class="sidebar-link" id="nav-official" onclick="openPage('official')">Official Resources</a>
         <a class="sidebar-link" id="nav-photography" onclick="openPage('photography')">Photography</a>
         <a class="sidebar-link" id="nav-guides" onclick="openPage('guides')">Guides</a>
@@ -308,7 +308,7 @@
         <div class="mobile-top-bar">
           <span onclick="goHome()">🏠 Home</span> &gt; 
           <span>Docs</span> &gt; 
-          <span class="active-crumb" id="breadcrumb-current">...</span>
+          <span class="active-crumb" id="breadcrumb-current">Projects</span>
         </div>
 
         <details class="mobile-toc">
@@ -340,10 +340,10 @@
   <div id="admin-modal" class="admin-modal hidden">
     <div class="admin-box">
       <div class="admin-header">
-        <h3>Raw Code Editor <span style="color:var(--ifm-color-primary);" id="editing-file-name">...</span></h3>
+        <h3>Raw Code Editor <span style="color:var(--ifm-color-primary);" id="editing-file-name">index.html</span></h3>
         <button class="btn-cancel" style="border:none; padding: 0.5rem;" onclick="closeRawEditor()">✕</button>
       </div>
-      <div id="admin-loading" style="display:none; color:var(--ifm-color-primary);">Fetching file details...</div>
+      <div id="admin-loading" style="display: none; color: var(--ifm-color-primary);">Fetching file details...</div>
       <textarea id="admin-editor" class="admin-editor" spellcheck="false"></textarea>
       <div class="admin-controls">
         <input type="password" id="admin-pass-raw" class="admin-pass" placeholder="Enter Admin Password">
