@@ -1411,9 +1411,14 @@ function unlockPremiumGrid(btn) {
                 const expiryTime = Date.now() + (5 * 60 * 60 * 1000); // 5 Hours
                 localStorage.setItem('ns_premium_unlocked', expiryTime.toString());
                 triggerUnlockUI();
-            }
+            },
             
-           
+            // Ad available nahi hai -> Error do (NO FREE UNLOCK)
+            adBreakDone: function(placementInfo) {
+                if(!placementInfo.adViewed && !placementInfo.adDismissed) {
+                    alert("⚠️ No ads available right now. Please try again later.");
+                    resetBtn();
+                }
             }
         });
 
