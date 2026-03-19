@@ -1,146 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nothing Space | Premium Unlock</title>
-    
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1607055557776596" crossorigin="anonymous"></script>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
-    
-    <style>
-        /* ================= PREMIUM NOTHING UI STYLES ================= */
-        :root {
-            --nothing-red: #ff3c00; /* Nothing's signature red */
-            --bg-color: #000000;
-            --text-color: #ffffff;
-            --card-bg: #111111;
-        }
-
-        body {
-            margin: 0; padding: 0; box-sizing: border-box;
-            background-color: var(--bg-color); color: var(--text-color);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            display: flex; justify-content: center; align-items: center;
-            height: 100vh; text-align: center; overflow: hidden;
-        }
-
-        /* Container designed like a premium card */
-        .premium-container {
-            background-color: var(--card-bg);
-            padding: 40px; border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(255, 60, 0, 0.05); /* Very subtle red glow */
-            border: 1px solid #222; max-width: 400px; width: 90%;
-            display: flex; flex-direction: column; align-items: center;
-        }
-
-        /* The glowing dot on top */
-        .header-dot {
-            width: 12px; height: 12px;
-            background-color: var(--nothing-red);
-            border-radius: 50%; margin-bottom: 30px;
-            box-shadow: 0 0 15px var(--nothing-red);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(255, 60, 0, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(255, 60, 0, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 60, 0, 0); }
-        }
-
-        /* "NOTHING SPACE" Text using Dot Font */
-        .brand-text {
-            font-family: 'Major Mono Display', monospace;
-            font-size: 1.2rem; color: #888;
-            letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px;
-        }
-
-        /* Success Message */
-        .success-text {
-            font-size: 2rem; font-weight: 800;
-            margin-bottom: 10px; letter-spacing: -1px;
-        }
-
-        .sub-text {
-            font-size: 1rem; color: #aaaaaa;
-            margin-bottom: 40px; max-width: 300px;
-            font-weight: 300; line-height: 1.5;
-        }
-
-        /* ================= PREMIUM GLASSY BUTTON ================= */
-        .btn-premium {
-            text-decoration: none; color: #000;
-            background-color: #fff;
-            padding: 16px 32px; border-radius: 30px;
-            font-weight: 700; font-size: 1rem;
-            letter-spacing: -0.5px;
-            border: 2px solid transparent;
-            transition: all 0.3s ease-in-out;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            display: flex; align-items: center; gap: 8px;
-        }
-
-        .btn-premium:hover {
-            transform: scale(0.96);
-            background-color: #eee;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-
-        /* Arrow animation inside button */
-        .btn-premium i {
-            transition: transform 0.3s ease;
-        }
-
-        .btn-premium:hover i {
-            transform: translateX(3px);
-        }
-
-        /* Box hidden initially for logic */
-        #contentBox { display: none; } 
-
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nothing Space | Premium Unlocked</title>
+<script>
+// Auto-detect theme from main site
+let t=localStorage.getItem('theme')||'dark';
+document.documentElement.setAttribute('data-theme',t);
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1607055557776596" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
+<style>
+:root{--nothing-red:#ff3c00;--bg:#000;--text:#fff;--card:#111;--border:#222}
+[data-theme="light"]{--bg:#fff;--text:#000;--card:#f5f5f5;--border:#ddd}
+body{margin:0;padding:20px;box-sizing:border-box;background-color:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;display:flex;justify-content:center;align-items:center;min-height:100vh;text-align:center;transition:background .3s,color .3s}
+.premium-container{background-color:var(--card);padding:40px 30px;border-radius:20px;box-shadow:0 10px 30px rgba(255,60,0,.05);border:1px solid var(--border);max-width:600px;width:100%;display:flex;flex-direction:column;align-items:center}
+.header-dot{width:12px;height:12px;background-color:var(--nothing-red);border-radius:50%;margin-bottom:20px;box-shadow:0 0 15px var(--nothing-red);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,60,0,.7)}70%{box-shadow:0 0 0 15px rgba(255,60,0,0)}100%{box-shadow:0 0 0 0 rgba(255,60,0,0)}}
+.brand-text{font-family:'Major Mono Display',monospace;font-size:1.2rem;color:#888;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+.success-text{font-size:2rem;font-weight:800;margin-bottom:20px;letter-spacing:-1px;color:var(--text)}
+.instructions-box{background-color:var(--bg);border-left:3px solid var(--nothing-red);border-radius:0 12px 12px 0;padding:20px;text-align:left;margin-bottom:30px;width:100%;box-sizing:border-box;border-top:1px solid var(--border);border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+.step-title{font-size:1.05rem;font-weight:600;color:var(--text);margin:15px 0 5px;display:flex;align-items:center;gap:8px}
+.step-title:first-child{margin-top:0}
+.step-desc{font-size:.9rem;color:#888;margin:0;line-height:1.6;padding-left:28px}
+.highlight{color:var(--text);font-weight:700}
+.btn-premium{text-decoration:none;color:var(--bg);background-color:var(--text);padding:16px 32px;border-radius:30px;font-weight:700;font-size:1rem;letter-spacing:-.5px;border:2px solid transparent;transition:all .3s ease-in-out;box-shadow:0 4px 6px rgba(0,0,0,.1);display:inline-flex;align-items:center;gap:8px}
+.btn-premium:hover{transform:scale(.96);opacity:.9}
+#contentBox{display:none;width:100%}
+</style>
 </head>
 <body>
-
-    <div class="premium-container">
-        <div class="header-dot"></div>
-        
-        <div class="brand-text">nothing spAce</div>
-        
-        <div id="contentBox">
-            <div class="success-text">PREMIUM UNLOCKED</div>
-            <p class="sub-text">Your 5-Hour Premium Access is ready. Back to the app and enjoy.</p>
-            
-            <a href="index.html" class="btn-premium" onclick="setTimer()">
-                <span>RETURN TO APP</span>
-                <i class="fa-solid fa-arrow-right"></i> </div>
-        </div>
-    </div>
-
-    <script>
-        // 1. Dhyan rakhna ki tumhare main index me FA link ho tabhi arrow dikhega
-        // Hum safety ke liye FA yahan bhi call kar sakte hain par page load badh jayega.
-
-        // 2. LOGIC: Wait for Offerwall or AdBlocker (Strict 2.5s Delay)
-        // User ko premium feel dene ke liye Staggered animation add kiya
-        setTimeout(() => {
-            let content = document.getElementById('contentBox');
-            if(content) {
-                // UI Content dikhao par opacity style se transition do
-                content.style.display = 'block';
-                content.style.opacity = '0';
-                content.style.transition = 'opacity 0.8s ease-in-out';
-                setTimeout(() => content.style.opacity = '1', 50);
-            }
-        }, 2500); // 2.5s Strict Wait
-
-        function setTimer() {
-            // SUCCESS! Seedha localStorage me time save karo aur index par return karo
-            localStorage.setItem('ns_premium_unlocked', Date.now() + (5 * 60 * 60 * 1000)); // 5 Hours
-        }
-    </script>
-
+<div class="premium-container">
+<div class="header-dot"></div>
+<div class="brand-text">nothing spAce</div>
+<div id="contentBox">
+<div class="success-text">PREMIUM UNLOCKED</div>
+<div class="instructions-box">
+<div class="step-title"><i>📱Step 1:</i> Explore & Download Wallpapers</div>
+<p class="step-desc">On the main <span class="highlight">Nothing Space</span> interface, browse unique wallpapers featuring our stunning <span class="highlight">Depth Effect</span>. Explore depth visuals, select the setups that define your aesthetic, and download them cleanly to your device.</p>
+<div class="step-title">🧩 Step 2: Open KLWP and Load the Theme</div>
+<p class="step-desc">Open KLWP Live Wallpaper App → Tap on the folder icon (library) in the top-right corner, choose import and select the theme you want to apply (for example, <span class="highlight">NS.klwp</span>, <span class="highlight">NS_2.klwp</span>). Your chosen theme will now load in the KLWP App.</p>
+<div class="step-title">🎨 Step 3: Adjust the Theme (Optional)</div>
+<p class="step-desc">You can customize or remove almost anything inside KLWP: wallpaper, dock, icons. Always hit the Save icon in the top-right corner after making changes.</p>
+<div class="step-title">🌍 Step 4: Set KLWP as Your Wallpaper</div>
+<p class="step-desc">Tap the Save icon in KLWP. Then tap “Set Wallpaper” → “Home Screen & Lock Screen”. Go back to your home screen and enjoy your new live setup! 🎉</p>
+<div class="step-title">🧠 Bonus Tips</div>
+<p class="step-desc">If KLWP theme is not working perfectly, open KLWP app → three dots (⋮) → App Settings → Advanced Options → <span class="highlight">Disable Parallel Rendering - Turn ON</span> (default: off).</p>
+<p class="step-desc" style="margin-top:15px;font-weight:bold;color:var(--nothing-red)">🚀 So go ahead — customize your Android!</p>
+</div>
+<a href="index.html" class="btn-premium" onclick="setTimer()"><span>Understood</span></a>
+</div>
+</div>
+<script>
+setTimeout(()=>{let c=document.getElementById('contentBox');if(c){c.style.display='block';c.style.opacity='0';c.style.transition='opacity 0.8s ease-in-out';setTimeout(()=>c.style.opacity='1',50)}},2500);
+function setTimer(){localStorage.setItem('ns_premium_unlocked',Date.now()+14400000)}
+</script>
 </body>
 </html>
