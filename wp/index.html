@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unlock Premium - Nothing Space</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-16070555577766" crossorigin="anonymous"></script>
+    <style>
+        body { background-color: #000; color: #fff; font-family: monospace; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; margin: 0; text-align: center; }
+        .btn { background-color: #fff; color: #000; padding: 15px 30px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 1.2rem; }
+        /* Pehle sab kuch hide rakho */
+        #contentBox { display: none; } 
+    </style>
+</head>
+<body>
+
+    <div id="contentBox">
+        <h2>🎉 PREMIUM UNLOCKED</h2>
+        <br>
+        <a href="index.html" class="btn" onclick="setTimer()">RETURN TO APP</a>
+    </div>
+
+    <script>
+        // 2.5 seconds wait karo taaki Google Offerwall aakar screen block kar de
+        // Fir content dikhao. (Agar adblocker hoga tab bhi usko 2.5s wait karna padega)
+        setTimeout(() => {
+            document.getElementById('contentBox').style.display = 'block';
+        }, 2500);
+
+        function setTimer() {
+            // Seedha 5 ghante ka time save karo
+            localStorage.setItem('ns_premium_unlocked', Date.now() + (5 * 60 * 60 * 1000));
+        }
+    </script>
+
+</body>
+</html>
