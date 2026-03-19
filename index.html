@@ -1340,17 +1340,37 @@ function unlockPremiumGrid(btn) {
         const unlockedUntil = localStorage.getItem('ns_premium_unlocked');
         const now = Date.now();
 
-        // UI Unlock Function (Sirf success par call hoga)
-        const triggerUnlockUI = () => {
+        // UI Unlock Function (Ab isme smooth staggered animation hai)
+        const triggerUnlockUI = async () => {
             btn.innerHTML = '<i class="fa-solid fa-box-open"></i> PREMIUM UNLOCKED';
-            if (typeof initWallpaperData === "function") initWallpaperData('premium');
             
+            // Wait for data to load
+            if (typeof initWallpaperData === "function") {
+                await initWallpaperData('premium'); 
+            }
+            
+            // Card Animation Logic
             let grid = document.getElementById('wallpaperGrid');
             if(grid) {
-                grid.style.opacity = '0';
-                grid.style.transition = 'opacity 0.5s ease-in-out';
-                setTimeout(() => grid.style.opacity = '1', 50);
+                grid.style.opacity = '1';
+                let cards = grid.querySelectorAll('.wp-card');
+                
+                // Sabko pehle chupa do (Niche dhakel do)
+                cards.forEach(card => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(50px) scale(0.95)';
+                    card.style.transition = 'all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1)';
+                });
+
+                // Ek-ek karke upar laao (100ms ke gap par)
+                cards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0) scale(1)';
+                    }, 100 * index); 
+                });
             }
+            
             btn.style.pointerEvents = 'all';
             if (navigator.vibrate) navigator.vibrate([50, 50]);
         };
@@ -1391,20 +1411,14 @@ function unlockPremiumGrid(btn) {
                 const expiryTime = Date.now() + (5 * 60 * 60 * 1000); // 5 Hours
                 localStorage.setItem('ns_premium_unlocked', expiryTime.toString());
                 triggerUnlockUI();
-            },
+            }
             
-            // Ad available nahi hai -> Error do (NO FREE UNLOCK)
-            adBreakDone: function(placementInfo) {
-                if(!placementInfo.adViewed && !placementInfo.adDismissed) {
-                    alert("⚠️ No ads available right now. Please try again later.");
-                    resetBtn();
-                }
+           
             }
         });
 
     }, 600); // 600ms Bouncing Animation
 }
-
     /* ================= CUSTOM SELECTOR LOGIC ================= */
 function openDeviceMenu() {
     const devices = [
