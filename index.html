@@ -1331,53 +1331,17 @@ style="background:none; border:none; padding:0; font:inherit; cursor:pointer; co
     }
     function toggleAI() { const section = document.getElementById('aiSection'); section.style.display = (section.style.display === 'none') ? 'block' : 'none'; }
     function toggleUpload() { const f = document.getElementById('setupUploadForm'); f.style.display = (f.style.display === 'none') ? 'block' : 'none'; }
-// ================= 5-HOUR REWARDED AD LOGIC =================
+// ================= STRICT 5-HOUR REWARDED AD LOGIC =================
 function unlockPremiumGrid(btn) {
-    // 1. SMART CHECK: LocalStorage check karo 5 hours ke liye
-    const unlockedUntil = localStorage.getItem('ns_premium_unlocked');
-    const now = Date.now();
-
-    // Agar time save kiya hua hai aur abhi wo time cross nahi hua hai
-    if (unlockedUntil && now < parseInt(unlockedUntil)) {
-        btn.innerHTML = '<i class="fa-solid fa-box-open"></i> PREMIUM UNLOCKED';
-        if (typeof initWallpaperData === "function") initWallpaperData('premium');
-        
-        let grid = document.getElementById('wallpaperGrid');
-        if(grid) {
-            grid.style.opacity = '0';
-            grid.style.transition = 'opacity 0.5s ease-in-out';
-            setTimeout(() => grid.style.opacity = '1', 50);
-        }
-        if (navigator.vibrate) navigator.vibrate([20, 20]);
-        return; // Ad mat dikhao, direct return kar jao
-    }
-
-    // 2. Agar 5 ghante pure ho gaye ya user pehli baar aaya hai, tab Ad dikhao
-    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> LOADING AD...';
+    btn.innerHTML = '<i class="fa-solid fa-gift fa-bounce"></i> VERIFYING...';
     btn.style.pointerEvents = 'none';
+    
+    setTimeout(() => {
+        const unlockedUntil = localStorage.getItem('ns_premium_unlocked');
+        const now = Date.now();
 
-    if (typeof adBreak === 'undefined') {
-        alert("⚠️ Please disable your AdBlocker to unlock Premium Themes!");
-        btn.innerHTML = '<span>PREMIUM THEME</span><i class="fa-solid fa-ad fa-beat"></i>';
-        btn.style.pointerEvents = 'all';
-        return;
-    }
-
-    adBreak({
-        type: 'reward', 
-        name: 'premium_theme_unlock',
-        beforeReward: function(showAdFn) { showAdFn(); },
-        adDismissed: function() {
-            alert("🔒 Ad skipped! You need to watch the full ad to unlock.");
-            btn.innerHTML = '<span>PREMIUM THEME</span><i class="fa-solid fa-ad fa-beat"></i>';
-            btn.style.pointerEvents = 'all';
-        },
-        adViewed: function() {
-            // 🎁 SUCCESS! User ne ad dekh liya.
-            // 5 hours ka time set karo (5 hours * 60 min * 60 sec * 1000 ms)
-            const expiryTime = Date.now() + (5 * 60 * 60 * 1000);
-            localStorage.setItem('ns_premium_unlocked', expiryTime.toString());
-            
+        // UI Unlock Function (Sirf success par call hoga)
+        const triggerUnlockUI = () => {
             btn.innerHTML = '<i class="fa-solid fa-box-open"></i> PREMIUM UNLOCKED';
             if (typeof initWallpaperData === "function") initWallpaperData('premium');
             
@@ -1387,23 +1351,58 @@ function unlockPremiumGrid(btn) {
                 grid.style.transition = 'opacity 0.5s ease-in-out';
                 setTimeout(() => grid.style.opacity = '1', 50);
             }
-            if (navigator.vibrate) navigator.vibrate([50, 50]);
             btn.style.pointerEvents = 'all';
-        },
-        adBreakDone: function(placementInfo) {
-            if(!placementInfo.adViewed && !placementInfo.adDismissed) {
-                 alert("⚠️ No ads available right now. Unlocking for free this time!");
-                 
-                 // Agar free mein unlock kar rahe hain, tab bhi 5 ghante ka timer laga dete hain
-                 const expiryTime = Date.now() + (5 * 60 * 60 * 1000);
-                 localStorage.setItem('ns_premium_unlocked', expiryTime.toString());
-                 
-                 btn.innerHTML = '<i class="fa-solid fa-box-open"></i> PREMIUM UNLOCKED';
-                 if (typeof initWallpaperData === "function") initWallpaperData('premium');
-                 btn.style.pointerEvents = 'all';
-            }
+            if (navigator.vibrate) navigator.vibrate([50, 50]);
+        };
+
+        // Reset Button Function (Fail hone par)
+        const resetBtn = () => {
+            btn.innerHTML = '<span>PREMIUM THEME</span><i class="fa-solid fa-ad fa-beat"></i>';
+            btn.style.pointerEvents = 'all';
+        };
+
+        // 1. Agar 5 ghante pure nahi hue toh direct open karo
+        if (unlockedUntil && now < parseInt(unlockedUntil)) {
+            triggerUnlockUI();
+            return; 
         }
-    });
+
+        // 2. STRICT CHECK: Agar Ad blocker hai, toh Error do (NO FREE UNLOCK)
+        if (typeof adBreak === 'undefined') {
+            alert("⚠️ Please disable your AdBlocker to unlock Premium Themes!");
+            resetBtn();
+            return;
+        }
+
+        // 3. AdSense Call
+        adBreak({
+            type: 'reward', 
+            name: 'premium_theme_unlock',
+            beforeReward: function(showAdFn) { showAdFn(); },
+            
+            // Ad skip kar diya -> NO UNLOCK
+            adDismissed: function() {
+                alert("🔒 Ad skipped! You need to watch the full ad to unlock.");
+                resetBtn();
+            },
+            
+            // Pura Ad dekh liya -> SUCCESS UNLOCK & 5 Hour Timer
+            adViewed: function() {
+                const expiryTime = Date.now() + (5 * 60 * 60 * 1000); // 5 Hours
+                localStorage.setItem('ns_premium_unlocked', expiryTime.toString());
+                triggerUnlockUI();
+            },
+            
+            // Ad available nahi hai -> Error do (NO FREE UNLOCK)
+            adBreakDone: function(placementInfo) {
+                if(!placementInfo.adViewed && !placementInfo.adDismissed) {
+                    alert("⚠️ No ads available right now. Please try again later.");
+                    resetBtn();
+                }
+            }
+        });
+
+    }, 600); // 600ms Bouncing Animation
 }
 
     /* ================= CUSTOM SELECTOR LOGIC ================= */
