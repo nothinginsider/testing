@@ -3,33 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unlock Premium - Nothing Space</title>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-16070555577766" crossorigin="anonymous"></script>
+    <title>Nothing Space | Premium Unlock</title>
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1607055557776596" crossorigin="anonymous"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
+    
     <style>
-        body { background-color: #000; color: #fff; font-family: monospace; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; margin: 0; text-align: center; }
-        .btn { background-color: #fff; color: #000; padding: 15px 30px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 1.2rem; }
-        /* Pehle sab kuch hide rakho */
+        /* ================= PREMIUM NOTHING UI STYLES ================= */
+        :root {
+            --nothing-red: #ff3c00; /* Nothing's signature red */
+            --bg-color: #000000;
+            --text-color: #ffffff;
+            --card-bg: #111111;
+        }
+
+        body {
+            margin: 0; padding: 0; box-sizing: border-box;
+            background-color: var(--bg-color); color: var(--text-color);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            display: flex; justify-content: center; align-items: center;
+            height: 100vh; text-align: center; overflow: hidden;
+        }
+
+        /* Container designed like a premium card */
+        .premium-container {
+            background-color: var(--card-bg);
+            padding: 40px; border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 60, 0, 0.05); /* Very subtle red glow */
+            border: 1px solid #222; max-width: 400px; width: 90%;
+            display: flex; flex-direction: column; align-items: center;
+        }
+
+        /* The glowing dot on top */
+        .header-dot {
+            width: 12px; height: 12px;
+            background-color: var(--nothing-red);
+            border-radius: 50%; margin-bottom: 30px;
+            box-shadow: 0 0 15px var(--nothing-red);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 60, 0, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 60, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 60, 0, 0); }
+        }
+
+        /* "NOTHING SPACE" Text using Dot Font */
+        .brand-text {
+            font-family: 'Major Mono Display', monospace;
+            font-size: 1.2rem; color: #888;
+            letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px;
+        }
+
+        /* Success Message */
+        .success-text {
+            font-size: 2rem; font-weight: 800;
+            margin-bottom: 10px; letter-spacing: -1px;
+        }
+
+        .sub-text {
+            font-size: 1rem; color: #aaaaaa;
+            margin-bottom: 40px; max-width: 300px;
+            font-weight: 300; line-height: 1.5;
+        }
+
+        /* ================= PREMIUM GLASSY BUTTON ================= */
+        .btn-premium {
+            text-decoration: none; color: #000;
+            background-color: #fff;
+            padding: 16px 32px; border-radius: 30px;
+            font-weight: 700; font-size: 1rem;
+            letter-spacing: -0.5px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex; align-items: center; gap: 8px;
+        }
+
+        .btn-premium:hover {
+            transform: scale(0.96);
+            background-color: #eee;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Arrow animation inside button */
+        .btn-premium i {
+            transition: transform 0.3s ease;
+        }
+
+        .btn-premium:hover i {
+            transform: translateX(3px);
+        }
+
+        /* Box hidden initially for logic */
         #contentBox { display: none; } 
+
     </style>
 </head>
 <body>
 
-    <div id="contentBox">
-        <h2>🎉 PREMIUM UNLOCKED</h2>
-        <br>
-        <a href="index.html" class="btn" onclick="setTimer()">RETURN TO APP</a>
+    <div class="premium-container">
+        <div class="header-dot"></div>
+        
+        <div class="brand-text">nothing spAce</div>
+        
+        <div id="contentBox">
+            <div class="success-text">PREMIUM UNLOCKED</div>
+            <p class="sub-text">Your 5-Hour Premium Access is ready. Back to the app and enjoy.</p>
+            
+            <a href="index.html" class="btn-premium" onclick="setTimer()">
+                <span>RETURN TO APP</span>
+                <i class="fa-solid fa-arrow-right"></i> </div>
+        </div>
     </div>
 
     <script>
-        // 2.5 seconds wait karo taaki Google Offerwall aakar screen block kar de
-        // Fir content dikhao. (Agar adblocker hoga tab bhi usko 2.5s wait karna padega)
+        // 1. Dhyan rakhna ki tumhare main index me FA link ho tabhi arrow dikhega
+        // Hum safety ke liye FA yahan bhi call kar sakte hain par page load badh jayega.
+
+        // 2. LOGIC: Wait for Offerwall or AdBlocker (Strict 2.5s Delay)
+        // User ko premium feel dene ke liye Staggered animation add kiya
         setTimeout(() => {
-            document.getElementById('contentBox').style.display = 'block';
-        }, 2500);
+            let content = document.getElementById('contentBox');
+            if(content) {
+                // UI Content dikhao par opacity style se transition do
+                content.style.display = 'block';
+                content.style.opacity = '0';
+                content.style.transition = 'opacity 0.8s ease-in-out';
+                setTimeout(() => content.style.opacity = '1', 50);
+            }
+        }, 2500); // 2.5s Strict Wait
 
         function setTimer() {
-            // Seedha 5 ghante ka time save karo
-            localStorage.setItem('ns_premium_unlocked', Date.now() + (5 * 60 * 60 * 1000));
+            // SUCCESS! Seedha localStorage me time save karo aur index par return karo
+            localStorage.setItem('ns_premium_unlocked', Date.now() + (5 * 60 * 60 * 1000)); // 5 Hours
         }
     </script>
 
