@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nothing Space | Premium Unlocked</title>
 <script>
-// Auto-detect theme from main site
-let t=localStorage.getItem('theme')||'dark';
-document.documentElement.setAttribute('data-theme',t);
+  let savedTheme = localStorage.getItem('theme');
+  let sysTheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', savedTheme || sysTheme);
 </script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1607055557776596" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
@@ -37,7 +37,7 @@ body{margin:0;padding:20px;box-sizing:border-box;background-color:var(--bg);colo
 <div id="contentBox">
 <div class="success-text">PREMIUM UNLOCKED</div>
 <div class="instructions-box">
-<div class="step-title"><i>📱Step 1:</i> Explore & Download Wallpapers</div>
+<div class="step-title"><i>📱Step 1: Explore & Download Wallpapers</div>
 <p class="step-desc">On the main <span class="highlight">Nothing Space</span> interface, browse unique wallpapers featuring our stunning <span class="highlight">Depth Effect</span>. Explore depth visuals, select the setups that define your aesthetic, and download them cleanly to your device.</p>
 <div class="step-title">🧩 Step 2: Open KLWP and Load the Theme</div>
 <p class="step-desc">Open KLWP Live Wallpaper App → Tap on the folder icon (library) in the top-right corner, choose import and select the theme you want to apply (for example, <span class="highlight">NS.klwp</span>, <span class="highlight">NS_2.klwp</span>). Your chosen theme will now load in the KLWP App.</p>
